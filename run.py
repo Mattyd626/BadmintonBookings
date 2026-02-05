@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify
 import requests
 import os
 from bs4 import BeautifulSoup
+from flask_cors import CORS
 
 with open(".env", 'r') as env:
     EMAIL = env.readline()
@@ -216,3 +217,4 @@ def bookings():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+    CORS(app)
