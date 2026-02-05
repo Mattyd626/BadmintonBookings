@@ -51,15 +51,25 @@ export default function Bookings() {
   }, [load]);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Card sx={{ maxWidth: 900, mx: "auto", mt: 5, p: 2 }}>
+  <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center", // horizontal center
+        alignItems: "center",     // vertical center
+        minHeight: "100vh",       // full viewport height
+        minWidth: "100vw",
+        p: 2,                     // optional padding
+        backgroundColor: "#5e5e5e", // optional background
+      }}
+    >
+      <Card sx={{ maxWidth: 900, width: "100%", p: 2, backgroundColor: "#e7e7e7" }}>
         <CardContent>
           <Stack spacing={3}>
             <Typography variant="h5" fontWeight={600}>
               Badminton Court Availability
             </Typography>
 
-            {/* Date Picker */}
             <DatePicker
               label="Select date"
               value={date}
@@ -67,14 +77,12 @@ export default function Bookings() {
               disablePast
             />
 
-            {/* Loading */}
             {loading && (
               <Box display="flex" justifyContent="center">
                 <CircularProgress />
               </Box>
             )}
 
-            {/* Table */}
             {!loading && slots.length > 0 && (
               <Table>
                 <TableHead>
@@ -92,7 +100,6 @@ export default function Bookings() {
                   {slots.map((slot) => (
                     <TableRow key={slot.time}>
                       <TableCell>{slot.time}</TableCell>
-
                       {slot.free.map((isFree, i) => (
                         <TableCell key={i} align="center">
                           <Chip
@@ -110,6 +117,8 @@ export default function Bookings() {
           </Stack>
         </CardContent>
       </Card>
-    </LocalizationProvider>
-  );
+    </Box>
+  </LocalizationProvider>
+);
+
 }
